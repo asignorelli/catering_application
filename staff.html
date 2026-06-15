@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome Staff - {{ super() }}{% endblock %}
+
+{% block body %}
+    <h3>Your Scheduled Events:</h3>
+    {% if my_events %}
+        {% for event in my_events %}
+            <p>{{ event.date }}</p>
+        {% endfor %}
+    {% else %}
+        <p>You are not signed up for any events!</p>
+    {% endif %}
+
+    <h3>Available Events:</h3>
+    {% if available_events %}
+        {% for event in available_events %}
+            <p>{{ event.date }} - <a href="{{ url_for('sign_up', event_id=event.id) }}">Sign Up</a></p>
+        {% endfor %}
+    {% else %}
+        <p>No events available to sign up for!</p>
+    {% endif %}
+{% endblock %}

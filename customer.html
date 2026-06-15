@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Welcome Customer - {{ super() }}{% endblock %}
+{% block body %}
+    <h3>Request an Event:</h3>
+    <form action="" method="post">
+        Date: <input type="date" name="date" />
+        <input type="submit" value="Request Event" />
+    </form>
+    <br />
+    <h3>Your Events:</h3>
+    {% if events %}
+        {% for event in events %}
+            <p>{{ event.date }} - <a href="{{ url_for('cancel_event', event_id=event.id) }}">Cancel</a></p>
+        {% endfor %}
+    {% else %}
+        <p>No events currently scheduled</p>
+    {% endif %}
+{% endblock %}

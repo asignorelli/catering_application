@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome Owner - {{ super() }}{% endblock %}
+
+{% block body %}
+    <a href="{{ url_for('register_staff') }}">Create Staff Account</a>
+    <br />
+    {% if events %}
+        {% for event in events %}
+            <p>{{ event.date }}</p>
+            
+            {% if staff[event.id] %}
+
+                {% for staff_member in staff[event.id] %}
+                    <p>{{ staff_member.username }}</p>
+                {% endfor %}
+
+            {% else %}
+                <p>No staff signed up for this event!</p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No events currently scheduled</p>
+    {% endif %}
+{% endblock %}
